@@ -1,0 +1,11 @@
+[09-Oct-2022 09:33:31 UTC] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.0.2". You are running 7.2.34. in /home/nirrtjiu/admin.spotlightattires.com/vendor/composer/platform_check.php on line 24
+[09-Oct-2022 10:16:57 UTC] PHP Warning:  require_once(/home/nirrtjiu/admin.spotlightattires.com/bootstrap/app.php): Failed to open stream: Permission denied in /home/nirrtjiu/admin.spotlightattires.com/index.php on line 47
+[09-Oct-2022 10:16:57 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nirrtjiu/admin.spotlightattires.com/bootstrap/app.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nirrtjiu/admin.spotlightattires.com/index.php:47
+Stack trace:
+#0 {main}
+  thrown in /home/nirrtjiu/admin.spotlightattires.com/index.php on line 47
+[09-Oct-2022 10:17:11 UTC] PHP Warning:  require_once(/home/nirrtjiu/admin.spotlightattires.com/bootstrap/app.php): Failed to open stream: Permission denied in /home/nirrtjiu/admin.spotlightattires.com/index.php on line 47
+[09-Oct-2022 10:17:11 UTC] PHP Fatal error:  Uncaught Error: Failed opening required '/home/nirrtjiu/admin.spotlightattires.com/bootstrap/app.php' (include_path='.:/opt/alt/php81/usr/share/pear:/opt/alt/php81/usr/share/php:/usr/share/pear:/usr/share/php') in /home/nirrtjiu/admin.spotlightattires.com/index.php:47
+Stack trace:
+#0 {main}
+  thrown in /home/nirrtjiu/admin.spotlightattires.com/index.php on line 47
