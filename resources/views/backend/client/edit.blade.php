@@ -49,7 +49,9 @@
             <label class="form-label">Customer Type</label>
                         <select class="select form-control" name="c_type" id="">
                             <option value="Normal" {{ $all_attribute->c_type == 'Normal' ? 'Selected':'' }}>Normal</option>
-                            <option value="Vip" {{ $all_attribute->c_type == 'Vip' ? 'Selected':'' }}>Vip</option>
+                            <option value="Silver" {{ $all_attribute->c_type == 'Silver' ? 'Selected':'' }}>Silver</option>
+                            <option value="Platinum" {{ $all_attribute->c_type == 'Platinum' ? 'Selected':'' }}>Platinum</option>
+
                         </select>
         </div>
     </div>

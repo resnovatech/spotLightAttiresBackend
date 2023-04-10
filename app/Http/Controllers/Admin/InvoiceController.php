@@ -46,6 +46,26 @@ class InvoiceController extends Controller
         });
     }
 
+public function invoice_data_discount(Request $request){
+     
+     $getValue = Client::where('slug',$request->main_value)->value('c_type');
+
+     if($getValue == 'Silver'){
+
+     $mainData = 5;
+
+    }elseif($getValue == 'Platinum'){
+
+$mainData = 10;
+
+    }else{
+$mainData = 0;
+}
+ 
+return $mainData;
+
+}
+
 
     public function create(){
 
@@ -55,7 +75,7 @@ class InvoiceController extends Controller
              return redirect('/admin/logout_session');
         }
 
-        $client_list_all = Client::latest()->get();
+        $client_list_all = Client::where('status',1)->latest()->get();
 
         $main_product_list_all = MainProduct::latest()->get();
 
@@ -459,6 +479,8 @@ return response()->json(['options'=>$data]);
     public function view($id){
 
         $invoice =  Invoice::where('id',$id)->first();
+
+//dd($invoice);
         $invoice_detail = InvoiceDetail::where('invoice_id',$id)->get();
 
         $payment_detail = Payment::where('client_slug',$invoice->client_slug)->where('invoice_id',$id)->get();
@@ -490,7 +512,7 @@ return response()->json(['options'=>$data]);
              return redirect('/admin/logout_session');
         }
 
-        $client_list_all = Client::latest()->get();
+        $client_list_all = Client::where('status',1)->latest()->get();
 
         $main_product_list_all = MainProduct::latest()->get();
 
@@ -556,11 +578,15 @@ return response()->json(['options'=>$data]);
 
         //return view('backend.invoice.print',compact('client_addresss_detail','ship_address_detail','invoice','invoice_detail','payment_detail'));
 
-        $file_Name_Custome = 'Invoice_main';
+//         $file_Name_Custome = 'Invoice_main';
 
 
-    $pdf=PDF::loadView('backend.invoice.print',['payment_detail'=>$payment_detail,'invoice'=>$invoice,'ship_address_detail'=>$ship_address_detail,'invoice_detail'=>$invoice_detail,'client_addresss_detail'=>$client_addresss_detail],[],['format' => [75, 100]]);
-return $pdf->stream($file_Name_Custome.''.'.pdf');
+$data =1;
+$data2 = 2;
+
+$pdf=PDF::loadView('backend.invoice.print',['invoice'=>$invoice,'invoice_detail'=>$invoice_detail,'payment_detail'=>$payment_detail,'ship_address_detail'=>$ship_address_detail,'client_addresss_detail'=>$client_addresss_detail]);
+
+return $pdf->stream('Order_Receipt.pdf');
 
     }
 

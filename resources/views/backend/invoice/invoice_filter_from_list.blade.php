@@ -227,8 +227,8 @@ Search Result
                 <tbody>
                     @foreach($product_list as $all_product_list)
     <?php
-                    $product_image = DB::table('feature_product_images')
-                    ->where('product_name', $all_product_list->product_id )->value('filename');
+                   $product_image = DB::table('main_products')
+                ->where('id', $all_product_list->product_id )->value('front_image');
 
 
                     $product_name = DB::table('main_products')

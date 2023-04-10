@@ -349,7 +349,7 @@ Route::group(['prefix' => 'admin'], function () {
 
     Route::post('invoice_payment_store', [InvoiceController::class, 'invoice_payment_store'])->name('invoice_payment_store');
 
-
+     Route::get('invoice_data_discount', [InvoiceController::class, 'invoice_data_discount'])->name('invoice_data_discount');
 
     Route::get('invoice_create', [InvoiceController::class, 'create'])->name('invoice_create');
     Route::get('invoice_list', [InvoiceController::class, 'index'])->name('invoice_list');

@@ -29,7 +29,7 @@ if (is_null($this->user) || !$this->user->can('dashboard.view')) {
         }
 
         $product_list = MainProduct::count();
-        $client_list = Client::count();
+        $client_list = Client::where('status',1)->count();
         $order_list = Invoice::count();
         
         $total_expense = Expense::sum('expense_amount');

@@ -34,20 +34,10 @@ Client information | {{ $ins_name }}
 
 <div class="row mb-4">
     <div class="col-sm-2">
-        <div class="d-flex flex-wrap gap-2">
-            <p class="horizontal-center">Selected:<span id="numberOfChecked"> 0</span></p>
-            <button type="" id="delete_button" class="btn btn-outline-danger waves-effect" disabled>
-                Delete
-            </button>
-        </div>
-    </div>
+          </div>
     <div class="col-sm-2">
         <div class="search-box me-2 mb-2 d-inline-block">
-            <div class="position-relative">
-                <input type="text" name="search_on_cat_name" class="form-control" id="search_on_cat_name" placeholder="Search...">
-                <i class="bx bx-search-alt search-icon"></i>
-            </div>
-        </div>
+                   </div>
     </div>
     <div class="col-sm-8">
         <div class="text-sm-end">
@@ -97,11 +87,13 @@ Client information | {{ $ins_name }}
                 <div class="col-lg-6 mb-2">
                     <div>
                         <label class="form-label">Customer Type</label>
-                        <select class="select form-control" name="c_type" id="">
-                            <option value="Normal">Normal</option>
-                            <option value="Vip">Vip</option>
-                        </select>
-                    </div>
+                       <select class="select form-control" name="c_type" id="">
+                            <option value="Normal" >Normal</option>
+                            <option value="Silver">Silver</option>
+                            <option value="Platinum">Platinum</option>
+
+                        </select>                   
+ </div>
                 </div>
                 <div class="col-lg-6 mb-2">
                     <div>
@@ -141,18 +133,13 @@ Client information | {{ $ins_name }}
         @include('flash_message')
         <div class="card">
             <div class="card-body" id="main_content_table">
-                <div class="table-responsive">
-                    <table class="table  table-striped">
-                        <thead class="table-light">
+                <div class="table-responsive"><table id="datatable-buttons" class="table table-bordered dt-responsive nowrap"
+    style="border-collapse: collapse; border-spacing: 0; width: 100%;">                       
+ <thead class="table-light">
                         <tr>
-                            <th style="width: 20px;" >
-                                <div class="form-check font-size-16">
-                                    <input class="form-check-input" type="checkbox" id="master">
-                                    <label class="form-check-label" for="checkAll"></label>
-                                </div>
-                            </th>
                             <th >Sl.</th>
                             <th >Name</th>
+   <th>Client Type</th>
                             <th >Email/Phone</th>
                             <th>Address</th>
                            <th>Join From</th>
@@ -165,20 +152,43 @@ Client information | {{ $ins_name }}
 
                             @foreach($client_list as $key=>$all_attribute)
                         <tr>
-                            <td>
-                                <div class="form-check font-size-16">
-                                    <input class="form-check-input sub_chk" value="{{$all_attribute->id}}"  data-id="{{$all_attribute->id}}" type="checkbox" id="orderidcheck01">
-                                    <label class="form-check-label" for="orderidcheck01"></label>
-                                </div>
-                            </td>
-                            <td class="text-body fw-bold">{{ $key+1 }}</td>
+                                                       <td class="text-body fw-bold">{{ $key+1 }}</td>
                             <td>{{ $all_attribute->name }} </td>
+<td>{{ $all_attribute->c_type }} </td>
                             <td>
                                 <p class="mb-1">{{ $all_attribute->email }}</p>
                                                 <p class="mb-0">{{ $all_attribute->phone }}</p>
 
                             </td>
 
+                           @if(empty($all_attribute->address))
+                                <?php 
+$total_buy56 = DB::table('delivary_addresses')->where('user_id',$all_attribute->user_id)->value('address');
+$total_buy57 = DB::table('delivary_addresses')->where('user_id',$all_attribute->user_id)->value('town');
+$total_buy58 = DB::table('delivary_addresses')->where('user_id',$all_attribute->user_id)->value('district');
+$total_buy59 = DB::table('delivary_addresses')->where('user_id',$all_attribute->user_id)->value('post_code');
+
+?>
+<td>
+@if(empty($total_buy56))
+
+@else
+{{ $total_buy56 }},{{ $total_buy57 }},{{ $total_buy58 }},{{ $total_buy59 }}
+@endif
+</td>
+<td>@if(empty($all_attribute->address))
+                                <span class="badge bg-success font-size-12">Web</span>
+                                @else
+                                <span class="badge bg-success font-size-12">Admin</span>
+                                @endif
+</td>
+<td>   <?php $total_buy = DB::table('invoices')->where('client_slug',$all_attribute->user_id)->sum('grand_total');?>
+
+
+                                <span class="badge bg-primary">{{ $total_buy }}</span>
+</td>
+
+@else
                             <td>{{ $all_attribute->address }}</td>
                             <td>
 
@@ -203,6 +213,7 @@ Client information | {{ $ins_name }}
 
 
                             </td>
+@endif
                             <td> {{ $all_attribute->created_at->format('d-m-Y') }}</td>
                             <td>
                                 <div class="d-flex gap-1">
@@ -238,7 +249,7 @@ Client information | {{ $ins_name }}
                         </tbody>
                     </table>
                 </div>
-                @include('backend.client.normal_pagination')
+       
             </div>
         </div>
     </div>
@@ -321,6 +332,5 @@ $("#myModal").modal('hide');
 });
 </script>
 
-<script type="text/javascript" src="{{ asset('/') }}public/custom_js/client_page.js"></script>
 <script type="text/javascript" src="{{ asset('/') }}public/custom_js/delete_code.js"></script>
 @endsection

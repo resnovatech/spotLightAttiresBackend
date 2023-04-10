@@ -254,19 +254,22 @@ Invoice information | {{ $ins_name }}
                             </div>
                         </div>
 
-                        <div class="mb-2 row">
-                            <label for="example-text-input" class="col-md-3 col-form-label">Vat/Tax in %</label>
-                            <div class="col-md-9">
-                                <input class="form-control" type="number" name="total_vat_tax" value="0" id="total_vat_tax">
-                            </div>
-                        </div>
-
+                                                      <input class="form-control" type="hidden" name="total_vat_tax" value="0" id="total_vat_tax">
+                         
                         <div class="mb-2 row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Delivery Charge</label>
                             <div class="col-md-9">
                                 <input class="form-control" type="number" name="total_d_charge" value="0" id="total_d_charge">
                             </div>
                         </div>
+ <div class="mb-2 row">
+                            <label for="example-text-input" class="col-md-3 col-form-label">Client Special Discount(%)</label>
+                            <div class="col-md-9">
+                                <input class="form-control" type="number" name="client_special_discount" value="0" id="client_special_discount">
+                            </div>
+
+                        </div>
+
                         <div class="mb-2 row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Grand Total</label>
                             <div class="col-md-9">
@@ -279,6 +282,7 @@ Invoice information | {{ $ins_name }}
                       
                         <div class="mb-2 row" id="show_order_by_price">
                         </div>
+
                         <div class="mb-2 row">
                             <label for="example-text-input" class="col-md-3 col-form-label">Total Pay</label>
                             <div class="col-md-9">
@@ -405,8 +409,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -500,8 +516,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -605,8 +633,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -687,8 +727,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -810,8 +862,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -891,9 +955,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 //end percentage calculator
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
+var client_special_amount = $('#client_special_discount').val();
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -1021,8 +1096,20 @@ var ff_pp_v = parseFloat(final_total_net_price) + parseFloat(final_grand_price_f
 
 var final_cal_value_from_quantity = (parseFloat(final_total_net_grandprice)+parseFloat(ff_pp_v)+parseFloat(final_total_d_charge)) - parseFloat(final_total_net_price);
 
-$('#total_grand_price_f').val(final_cal_value_from_quantity);
-//$('#total_payble_price').val(final_cal_value_from_quantity);
+var client_special_amount = $('#client_special_discount').val();
+
+if( client_special_amount == 0){
+var get_final_amount_cus = final_cal_value_from_quantity;
+}else{
+var client_special_amount_f = (parseFloat(final_cal_value_from_quantity)*parseFloat(client_special_amount)) / 100;
+var get_final_amount_cus = final_cal_value_from_quantity - client_special_amount_f;
+
+
+}
+
+
+$('#total_grand_price_f').val(get_final_amount_cus);
+//$('#total_payble_price').val(get_final_amount_cus);
 
     //end grand total price
 
@@ -1041,27 +1128,7 @@ $(document).ready(function () {
 
     ///vat tax  start price
 
-    $("#total_vat_tax").change(function(){
-
-        var total_net_price_f = $('#total_net_price_f').val();
-
-        var total_grand_price_f = $('#total_grand_price_f').val();
-
-        var total_net_discountprice_f = $('#total_net_discountprice_f').val();
-         var total_d_charge = $('#total_d_charge').val();
-        var total_vat_tax = $(this).val();
-
-        var final_grand_price_f_all = (parseFloat(total_net_price_f)*parseFloat(total_vat_tax)) / 100;
-
-
-        var ff_mm = (parseFloat(total_d_charge)+parseFloat(final_grand_price_f_all) + parseFloat(total_net_price_f))- parseFloat(total_net_discountprice_f);
-
-        $('#total_grand_price_f').val(ff_mm);
-        //$('#total_payble_price').val(ff_mm);
-
-
-    });
-    ///end vat tax end price
+       ///end vat tax end price
 
     //delivary charge
 
@@ -1146,6 +1213,7 @@ $('#total_final_due1').val(final_due_price);
     $("#select_client_name_from_list").change(function(){
 
         var main_value = $(this).val();
+           
 
         $.ajax({
     url: "{{ route('address_list_detail') }}",
@@ -1156,6 +1224,19 @@ $('#total_final_due1').val(final_due_price);
       $("#shipping_address_via_client").html(data.options);
     }
     });
+
+///////////
+
+    $.ajax({
+    url: "{{ route('invoice_data_discount') }}",
+    method: 'GET',
+    data: {main_value:main_value},
+    success: function(data) {
+      $("#client_special_discount").val('');
+      $("#client_special_discount").val(data);
+    }
+    });
+
 
 });
 

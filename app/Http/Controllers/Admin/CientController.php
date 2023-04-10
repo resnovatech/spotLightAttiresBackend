@@ -32,20 +32,10 @@ class CientController extends Controller
             return redirect('/admin/logout_session');
         }
 
-        $total_data = Client::latest()->count();
+      
+        $client_list = Client::where('status',1)->latest()->get();
 
-        $total_serial_number1= $total_data/10;
-
-        if (is_float($total_serial_number1)){
-            $total_serial_number = ceil($total_serial_number1);
-
-        }else{
-            $total_serial_number = $total_serial_number1;
-        }
-
-        $client_list = Client::latest()->limit(10)->get();
-
-        return view('backend.client.index',compact('client_list','total_serial_number'));
+        return view('backend.client.index',compact('client_list'));
     }
 
 
@@ -60,6 +50,7 @@ class CientController extends Controller
         $category_list->slug = $request->slug;
         $category_list->phone = $request->phone;
         $category_list->email = $request->email;
+        $category_list->c_type = $request->c_type;
         $category_list->address = $request->address;
         $category_list-> shipping_address = $request->shipping_address;
         $category_list->save();
@@ -128,6 +119,7 @@ if(empty($check_slug1)){
         $category_list->slug = $request->slug;
         $category_list->phone = $request->phone;
         $category_list->email = $request->email;
+       $category_list->c_type = $request->c_type;
         $category_list->address = $request->address;
         $category_list-> shipping_address = $request->shipping_address;
         $category_list->save();
@@ -166,7 +158,7 @@ if(empty($check_slug1)){
 
         if($id_for_pass == 1){
 
-            $total_data =Client::latest()->count();
+            $total_data =Client::where('status',1)->latest()->count();
             $total_serial_number1= $total_data/10;
 
     if (is_float($total_serial_number1)){
@@ -175,10 +167,10 @@ if(empty($check_slug1)){
     }else{
         $total_serial_number = $total_serial_number1;
     }
-            $product_list = Client::latest()->limit(10)->get();
+            $product_list = Client::where('status',1)->latest()->limit(10)->get();
             $minus_one = 0;
         }else{
-            $total_data = Client::latest()->count();
+            $total_data = Client::where('status',1)->latest()->count();
             $total_serial_number1= $total_data/10;
 
     if (is_float($total_serial_number1)){
@@ -189,7 +181,7 @@ if(empty($check_slug1)){
     }
             $minus_one = ($id_for_pass - 1)*10;
 
-            $product_list = Client::latest()->skip($minus_one)->take(10)->get();
+            $product_list = Client::where('status',1)->latest()->skip($minus_one)->take(10)->get();
         }
 
         $data = view('backend.client.client_list_pagination_start',compact('minus_one','product_list','total_serial_number','id_for_pass'))->render();
@@ -206,7 +198,7 @@ if(empty($check_slug1)){
 
 
 
- $total_data = Client::latest()->count();
+ $total_data = Client::where('status',1)->latest()->count();
 
  $total_serial_number1= $total_data/10;
 
@@ -219,7 +211,7 @@ if(empty($check_slug1)){
 
   //dd($total_serial_number);
 
-     $product_list = Client::latest()->limit(10)->get();
+     $product_list = Client::where('status',1)->latest()->limit(10)->get();
 
 
 
@@ -236,7 +228,7 @@ return response()->json(['options'=>$data]);
 
 
 
-        $total_data = Client::Where('name','LIKE','%'.$search_value.'%')
+        $total_data = Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
         ->orWhere('slug','LIKE','%'.$search_value.'%')
         ->orWhere('phone','LIKE','%'.$search_value.'%')
         ->orWhere('address','LIKE','%'.$search_value.'%')
@@ -253,7 +245,7 @@ return response()->json(['options'=>$data]);
 
              //dd($total_serial_number);
 
-                $product_list = Client::Where('name','LIKE','%'.$search_value.'%')
+                $product_list = Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
                 ->orWhere('slug','LIKE','%'.$search_value.'%')
                 ->orWhere('phone','LIKE','%'.$search_value.'%')
                 ->orWhere('address','LIKE','%'.$search_value.'%')
@@ -275,7 +267,7 @@ return response()->json(['options'=>$data]);
 
         if($id_for_pass == 1){
 
-            $total_data =Client::Where('name','LIKE','%'.$search_value.'%')
+            $total_data =Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
             ->orWhere('slug','LIKE','%'.$search_value.'%')
             ->orWhere('phone','LIKE','%'.$search_value.'%')
             ->orWhere('address','LIKE','%'.$search_value.'%')
@@ -288,14 +280,14 @@ return response()->json(['options'=>$data]);
     }else{
         $total_serial_number = $total_serial_number1;
     }
-            $product_list = Client::Where('name','LIKE','%'.$search_value.'%')
+            $product_list = Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
             ->orWhere('slug','LIKE','%'.$search_value.'%')
             ->orWhere('phone','LIKE','%'.$search_value.'%')
             ->orWhere('address','LIKE','%'.$search_value.'%')
            ->orWhere('email','LIKE','%'.$search_value.'%')->latest()->limit(10)->get();
             $minus_one = 0;
         }else{
-            $total_data = Client::Where('name','LIKE','%'.$search_value.'%')
+            $total_data = Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
             ->orWhere('slug','LIKE','%'.$search_value.'%')
             ->orWhere('phone','LIKE','%'.$search_value.'%')
             ->orWhere('address','LIKE','%'.$search_value.'%')
@@ -310,7 +302,7 @@ return response()->json(['options'=>$data]);
     }
             $minus_one = ($id_for_pass - 1)*10;
 
-            $product_list = Client::Where('name','LIKE','%'.$search_value.'%')
+            $product_list = Client::where('status',1)->Where('name','LIKE','%'.$search_value.'%')
             ->orWhere('slug','LIKE','%'.$search_value.'%')
             ->orWhere('phone','LIKE','%'.$search_value.'%')
             ->orWhere('address','LIKE','%'.$search_value.'%')

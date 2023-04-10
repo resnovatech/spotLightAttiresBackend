@@ -95,7 +95,11 @@ $client_name = DB::table('clients')
                 </td>
                 <td>
                     @if($all_invoice_list->due == 0 )
+ @if(empty($all_invoice_list->order_status))
                     <span class="badge badge-pill badge-soft-success font-size-12">Paid</span>
+@else
+ <span class="badge badge-pill badge-soft-success font-size-12">Cash On Delivery</span>
+@endif
                     @else
                     <span class="badge badge-pill badge-soft-danger font-size-12">UnPaid</span>
                     @endif
@@ -199,8 +203,8 @@ $client_name = DB::table('clients')
             <tbody>
                 @foreach($product_list as $all_product_list)
 <?php
-                $product_image = DB::table('feature_product_images')
-                ->where('product_name', $all_product_list->product_id )->value('filename');
+                $product_image = DB::table('main_products')
+                ->where('id', $all_product_list->product_id )->value('front_image');
 
 
                 $product_name = DB::table('main_products')
@@ -239,15 +243,7 @@ $client_name = DB::table('clients')
                     {{ $all_invoice_list->total_discount}}
                 </td>
             </tr>
-            <tr>
-                <td colspan="2">
-                    <h6 class="m-0 text-right">Vat/Tax:</h6>
-                </td>
-                <td>
-                    {{ $all_invoice_list->total_vat_tax}}
-                </td>
-            </tr>
-            <tr>
+                      <tr>
                 <td colspan="2">
                     <h6 class="m-0 text-right">Shipping:</h6>
                 </td>

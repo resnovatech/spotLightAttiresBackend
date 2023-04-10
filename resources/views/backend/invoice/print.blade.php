@@ -31,7 +31,7 @@
 
         .first_table tr td:nth-child(1) img {
             height:70px;
-            width:70px;
+            width:450px;
         }
 
         .first_table tr td:nth-child(2)
@@ -40,8 +40,7 @@
         }
 
         .first_table tr td:nth-child(2) img {
-            height:40px;
-            width:40px;
+           
         }
 
         .first_table tr td:nth-child(2) p {
@@ -131,7 +130,7 @@
                 <!--<img src="{{ asset('public/new_admin/assets/images/rqr.jpg') }}" height="50" alt="">-->
             </td>
             <td>
-                <img src="{{ asset('/') }}{{ $logo }}" height="50" alt="">
+                <img src="https://adminpanel.spotlightattires.com/public/uploads/1678859299.png"  alt="">
                 <p style="font-weight: bold;">Merchant No: +8801743763369</p>
                 <h4>spotlightattires.com</h4>
             </td>
@@ -164,7 +163,7 @@
             <td>:{{ $invoice_detail_new->town }},{{ $invoice_detail_new->district }},{{ $invoice_detail_new->post_code }}</td>
         </tr>
     </table>
- 
+
  @else
     <table class="second_table">
         <tr>
@@ -241,7 +240,7 @@
           <td>{{ $invoice->delivery_charge }}</td>
         </tr>
         @if($invoice->total_discount  == 0 )
-        
+
         @else
         <tr>
             <td>Discount</td>
@@ -252,9 +251,9 @@
           <td>Total</td>
           <td>{{ $invoice->grand_total }}</td>
         </tr>
-        
 
-        
+
+
       </table>
     </td>
   </tr>

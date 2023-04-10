@@ -4,7 +4,7 @@
                     @csrf
                     <?php
                     $categorylist = DB::table('product_categories')
-                                            ->select('cat_name')->distinct()->latest()->get();
+                                            ->select('cat_name')->groupby('cat_name')->get();
                     ?>
 
                     <div class="form-group col-md-12 col-sm-12">

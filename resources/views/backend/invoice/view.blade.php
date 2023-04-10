@@ -84,8 +84,9 @@ Invoice Detail | {{ $ins_name }}
                             {{ $client_addresss_detail->name }}<br>
                             {{ $client_addresss_detail->email }}<br>
                             {{ $client_addresss_detail->phone }}<br>
-                            {{ $client_addresss_detail->address }}
+                        
                         </address>
+
                     </div>
                     <div class="col-sm-6 text-sm-end">
                         <address class="mt-2 mt-sm-0">
@@ -118,7 +119,10 @@ Invoice Detail | {{ $ins_name }}
                         <thead>
                         <tr>
                             <th style="width: 70px;">No.</th>
+<th>Image</th>
                             <th>Item</th>
+<th>Color</th>
+<th>Size</th>
                             <th>Quantity</th>
                             <th>Unit Price</th>
                             <th class="text-end">Price</th>
@@ -134,12 +138,19 @@ Invoice Detail | {{ $ins_name }}
                             $product_name = DB::table('main_products')
                             ->where('id', $all_invoice_detail->product_id )->value('product_name');
 
+$front_image = DB::table('main_products')
+                            ->where('id', $all_invoice_detail->product_id )->value('front_image');
+
+
 
                                                     ?>
 
                         <tr>
                             <td>{{ $key+1 }}</td>
+ <td><img src="https://adminpanel.spotlightattires.com/{{ $front_image }}"  style="height:60px;"  /> </td>
                             <td>{{ $product_name }}</td>
+<td>{{ $all_invoice_detail->color }}</td>
+<td>{{ $all_invoice_detail->size }}</td>
                             <td>{{ $all_invoice_detail->qty }}</td>
                             <td>{{ $all_invoice_detail->price }}</td>
                             <td class="text-end">{{ $all_invoice_detail->total_price }}</td>
@@ -162,13 +173,7 @@ Invoice Detail | {{ $ins_name }}
                             </td>
                             <td class="border-0 text-end">{{ $invoice->total_discount }}</td>
                         </tr>
-                        <tr>
-                            <td colspan="4" class="border-0 text-end">
-                                <strong>Vat/Tax</strong>
-                            </td>
-                            <td class="border-0 text-end">{{ $invoice->total_vat_tax }}</td>
-                        </tr>
-                        <tr>
+                                               <tr>
                             <td colspan="4" class="border-0 text-end">
                                 <strong>Total</strong>
                             </td>
@@ -176,15 +181,7 @@ Invoice Detail | {{ $ins_name }}
                                 <h4 class="m-0">{{ $invoice->grand_total }}</h4>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="4" class="border-0 text-end">
-                                <strong>Due</strong>
-                            </td>
-                            <td class="border-0 text-end">
-                                <h4 class="m-0">{{ $invoice->due }}</h4>
-                            </td>
-                        </tr>
-                        <tr>
+                                              <tr>
                             <td colspan="4" class="border-0 text-end">
                                 <strong>Total Pay</strong>
                             </td>

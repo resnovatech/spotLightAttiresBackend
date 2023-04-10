@@ -744,6 +744,9 @@ if (array_key_exists("pdatabase_imaged_string".$key, $input)){
 
         $condition_table_sizechart_list = $input['size'];
 
+if (array_key_exists("shoulder", $input) && array_key_exists("chest", $input)){
+
+
 
         foreach($condition_table_sizechart_list as $key => $condition_table_sizechart_list){
             $form= new SizeChart();
@@ -756,7 +759,19 @@ if (array_key_exists("pdatabase_imaged_string".$key, $input)){
             $form->save();
        }
 
+}else{
 
+ foreach($condition_table_sizechart_list as $key => $condition_table_sizechart_list){
+            $form= new SizeChart();
+            $form->size_name=$input['size'][$key];
+            $form->lenght=$input['length'][$key];
+            $form->width=$input['width'][$key];
+                    $form->product_name =  $product_id;
+            $form->save();
+       }
+
+
+}
 
     }
 
@@ -1170,6 +1185,12 @@ foreach($previous_child_color_image as $key_image_database=>$previous_child_colo
         $condition_table_sizechart_list = $input['size'];
         $f_d = SizeChart::where('product_name',$product_id)->delete();
 
+      
+
+if (array_key_exists("shoulder", $input) && array_key_exists("chest", $input)){
+
+
+
         foreach($condition_table_sizechart_list as $key => $condition_table_sizechart_list){
             $form= new SizeChart();
             $form->size_name=$input['size'][$key];
@@ -1180,6 +1201,21 @@ foreach($previous_child_color_image as $key_image_database=>$previous_child_colo
             $form->product_name =  $product_id;
             $form->save();
        }
+
+}else{
+
+ foreach($condition_table_sizechart_list as $key => $condition_table_sizechart_list){
+            $form= new SizeChart();
+            $form->size_name=$input['size'][$key];
+            $form->lenght=$input['length'][$key];
+            $form->width=$input['width'][$key];
+                    $form->product_name =  $product_id;
+            $form->save();
+       }
+
+
+}
+
 
 
 
